@@ -10,18 +10,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUser = exports.getAllUsers = void 0;
+const data_1 = require("../data/data");
 function getAllUsers(request, response) {
     return __awaiter(this, void 0, void 0, function* () {
-        response.status(200).json({
-            status: "success",
-            results: 10,
-            data: { name: "Taofeek", age: 23 },
-        });
-        // response.send("Hello");
+        response.status(200).json(data_1.users);
     });
 }
 exports.getAllUsers = getAllUsers;
 function getUser(request, response) {
-    return __awaiter(this, void 0, void 0, function* () { });
+    return __awaiter(this, void 0, void 0, function* () {
+        const { id } = request.params;
+        const user = data_1.users.find((user) => user.id === Number(id));
+        response.status(200).json(user);
+    });
 }
 exports.getUser = getUser;

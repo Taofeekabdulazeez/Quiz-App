@@ -6,7 +6,7 @@ const app: Application = express();
 
 app.use(express.json());
 app.use(cors());
-// app.use(express.static(`${__filename}`));
+app.use(express.static(`backend`));
 
 app.use("/api/users", userRouter);
 

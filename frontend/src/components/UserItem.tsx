@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { User } from "../interfaces/interface";
 import { deleteUser } from "../services/apiUsers";
 import { useNavigate } from "react-router-dom";
@@ -8,8 +8,12 @@ type UserItemProps = {
 };
 
 function UserItem({ user }: UserItemProps) {
+  const queryClient = useQueryClient();
   const { isPending: isDeleting, mutate } = useMutation({
     mutationFn: deleteUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
   });
 
   const navigate = useNavigate();

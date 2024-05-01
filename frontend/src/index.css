@@ -96,8 +96,8 @@ button:focus-visible {
 }
 
 .loader {
-  width: 48px;
-  height: 48px;
+  width: 2rem;
+  height: 2rem;
   border: 5px dotted #fff;
   border-radius: 50%;
   display: inline-block;

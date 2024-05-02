@@ -1,36 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
-import { getAllUsers } from "../services/apiUsers";
 import UserItem from "./UserItem";
+import CreateForm from "./CreateForm";
+import { useUsers } from "../hooks/useUsers";
 
 function UserList() {
-  const {
-    isLoading,
-    data: users,
-    error,
-  } = useQuery({
-    queryKey: ["users"],
-    queryFn: getAllUsers,
-  });
+  const { isLoading, users, error } = useUsers();
 
   if (isLoading) return <strong>Loading users</strong>;
 
-  if (error)
-    return (
-      <strong
-        style={{
-          color: "red",
-        }}
-      >
-        Couldn't get users
-      </strong>
-    );
+  if (error) return <strong>Couldn't get users</strong>;
 
   return (
-    <ul className="user-list">
-      {users?.map((user) => (
-        <UserItem key={user.id} user={user} />
-      ))}
-    </ul>
+    <>
+      <ul className="user-list">
+        {users?.map((user) => (
+          <UserItem key={user._id} user={user} />
+        ))}
+      </ul>
+      <CreateForm />
+    </>
   );
 }
 

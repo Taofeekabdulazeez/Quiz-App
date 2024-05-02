@@ -1,13 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
-import { getUser } from "../services/apiUsers";
+import { useUser } from "../hooks/useUser";
 
 function UserOverview() {
-  const { userId } = useParams();
-  const { isLoading, data: user } = useQuery({
-    queryKey: ["user"],
-    queryFn: () => getUser(Number(userId)),
-  });
+  const { isLoading, user } = useUser();
 
   if (isLoading) return <strong>Loading details...</strong>;
 

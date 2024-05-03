@@ -31,7 +31,7 @@ function UserItem({ user }: UserItemProps) {
             disabled={isEditing}
             onClick={() => setShowForm((show) => !show)}
           >
-            {isEditing ? "updating" : "edit"}
+            {isEditing ? "updating" : `${showForm ? "cancel" : "edit"}`}
           </button>
           <button onClick={() => deleteUser(user._id)}>
             {isDeleting ? <span className="loader"></span> : "delete"}

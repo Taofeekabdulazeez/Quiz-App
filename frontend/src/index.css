@@ -1,6 +1,7 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"); */
 
 :root {
   --color-gray-50: #ffffff;
@@ -44,6 +45,20 @@
   --color-red-1200: #740000;
   --color-red-1300: #590000;
 
+  --color-green-100: #cef8e0;
+  --color-green-200: #adf4ce;
+  --color-green-300: #89ecbc;
+  --color-green-400: #67dea8;
+  --color-green-500: #49cc93;
+  --color-green-600: #2fb880;
+  --color-green-700: #15a46e;
+  --color-green-800: #008f5d;
+  --color-green-900: #007a4d;
+  --color-green-1000: #00653e;
+  --color-green-1100: #005132;
+  --color-green-1200: #053f27;
+  --color-green-1300: #0a2e1d;
+
   --font-size-50: 1.1rem;
   --font-size-75: 1.2rem;
   --font-size-100: 1.4rem;
@@ -74,7 +89,7 @@
   --font-size-xxs: var(--font-size-100);
   --font-size-base: var(--font-size-100);
 
-  --font-family-body: "Inter";
+  --font-family-body: "Poppins";
   --line-height-body: 1.5;
 }
 
@@ -140,6 +155,20 @@
   --color-red-1200: #ffcdc3;
   --color-red-1300: #ffdfd9;
 
+  --color-green-100: #044329;
+  --color-green-200: #004e2f;
+  --color-green-300: #005c38;
+  --color-green-400: #006c43;
+  --color-green-500: #007d4e;
+  --color-green-600: #008f5d;
+  --color-green-700: #12a26c;
+  --color-green-800: #2bb47d;
+  --color-green-900: #43c78f;
+  --color-green-1000: #5ed9a2;
+  --color-green-1100: #81e9b8;
+  --color-green-1200: #b1f4d1;
+  --color-green-1300: #dffaea;
+
   --bg-base: var(--color-gray-100);
   --bg-layer-1: var(--color-gray-50);
   --bg-layer-2: var(--color-gray-75);
@@ -158,6 +187,7 @@ html {
 
 body {
   font-family: var(--font-family-body), sans-serif;
+
   /* background-color: var(--bg-base); */
   background-color: var(--bg-base);
   font-size: var(--font-size-base);

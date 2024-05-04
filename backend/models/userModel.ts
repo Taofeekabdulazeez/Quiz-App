@@ -3,13 +3,10 @@ import { Schema, model } from "mongoose";
 const UserSchema = new Schema(
   {
     name: String,
-    course: String,
     age: Number,
+    email: String,
     status: String,
-    startTime: Date,
-    endTime: Date,
-    score: Number,
-    pass: Boolean,
+    numQuiz: Number,
   },
   { versionKey: false }
 );

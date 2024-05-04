@@ -1,10 +1,16 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import ActionButton from "../ui/ActionButton";
+import { BiDotsVerticalRounded } from "react-icons/bi";
 
 const TableContainer = styled.table`
   overflow: hidden;
   border-radius: 13px;
   width: 100%;
   border: 1px solid var(--color-gray-200);
+`;
+
+const Thead = styled.thead`
+  /* background-color: var(--color-blue-50); */
 `;
 
 const Table = styled.table`
@@ -29,50 +35,157 @@ const Th = styled.th`
   text-transform: uppercase;
   font-size: var(--font-size-xxs);
   padding: var(--table-padding);
+  font-weight: 550;
 `;
 
 const Td = styled.td`
   padding: var(--table-padding);
+  font-weight: 500;
+`;
+
+const FlexCol = styled.span`
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+`;
+const Name = styled.span`
+  font-weight: 500;
+`;
+
+const Email = styled.span`
+  font-size: 1.2rem;
+  font-weight: 400;
+`;
+
+const Time = styled.span`
+  font-size: 1.2rem;
+  font-weight: 400;
+`;
+
+const ID = styled.span`
+  font-weight: 500;
+  color: var(--color-blue-1300);
+`;
+
+const Pass = styled.span`
+  font-weight: 500;
+  color: var(--color-green-600);
+`;
+const Fail = styled.span`
+  font-weight: 500;
+  color: var(--color-red-900);
+`;
+
+const Tag = styled.span<{ $type: string }>`
+  width: fit-content;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.4rem 1.2rem;
+  border-radius: 100px;
+
+  ${(props) =>
+    props.$type === "completed" &&
+    css`
+      background-color: var(--color-green-100);
+      color: var(--color-green-900);
+    `}
+
+  ${(props) =>
+    props.$type === "pending" &&
+    css`
+      background-color: var(--color-red-100);
+      color: var(--color-red-900);
+    `}
+
+    ${(props) =>
+    props.$type === "active" &&
+    css`
+      background-color: var(--color-blue-100);
+      color: var(--color-blue-900);
+    `}
 `;
 
 function ResultList() {
   return (
     <TableContainer>
       <Table>
-        <thead>
+        <Thead>
           <Tr>
             <Th>Name</Th>
+            <Th>Exam ID</Th>
             <Th>Course</Th>
             <Th>Status</Th>
-            <Th>Start Time</Th>
-            <Th>End Time</Th>
+            <Th>Date</Th>
             <Th>Score</Th>
+            <Th>Pass/Fail</Th>
+            <Th></Th>
           </Tr>
-        </thead>
+        </Thead>
         <Tbody>
           <Tr>
-            <Td>Taofeek</Td>
-            <Td>English</Td>
-            <Td>completed</Td>
-            <Td>23/04/2024</Td>
-            <Td>23/05/2024</Td>
+            <Td>
+              <FlexCol>
+                <Name>Taofeek</Name>
+                <Email>tao@gmail.com</Email>
+              </FlexCol>
+            </Td>
+            <Td>
+              <ID>84656753535</ID>
+            </Td>
+            <Td>GNS112</Td>
+            <Td>
+              <Tag $type="completed">Completed</Tag>
+            </Td>
+            <Td>
+              <FlexCol>
+                <Name>23/02/2024</Name>
+                <Time>9:30am → 9:55am</Time>
+              </FlexCol>
+            </Td>
             <Td>21/40</Td>
+            <Td>
+              <Pass>Pass</Pass>
+            </Td>
+            <Td>
+              <ActionButton>
+                <BiDotsVerticalRounded size={20} />
+              </ActionButton>
+            </Td>
           </Tr>
           <Tr>
             <Td>Taofeek</Td>
-            <Td>English</Td>
-            <Td>completed</Td>
+            <Td>84656753536</Td>
+            <Td>GNS112</Td>
+            <Td>
+              <Tag $type="active">Active</Tag>
+            </Td>
             <Td>23/04/2024</Td>
-            <Td>23/05/2024</Td>
-            <Td>32/40</Td>
+            <Td>12/40</Td>
+            <Td>
+              <Fail>Fail</Fail>
+            </Td>
+            <Td>
+              <ActionButton>
+                <BiDotsVerticalRounded size={20} />
+              </ActionButton>
+            </Td>
           </Tr>
           <Tr>
             <Td>Taofeek</Td>
-            <Td>English</Td>
-            <Td>completed</Td>
+            <Td>84656753537</Td>
+            <Td>GNS112</Td>
+            <Td>
+              <Tag $type="pending">pending</Tag>
+            </Td>
             <Td>23/04/2024</Td>
-            <Td>23/05/2024</Td>
-            <Td>7/40</Td>
+            <Td>27/40</Td>
+            <Td>Pass</Td>
+            <Td>
+              <ActionButton>
+                <BiDotsVerticalRounded size={20} />
+              </ActionButton>
+            </Td>
           </Tr>
         </Tbody>
       </Table>

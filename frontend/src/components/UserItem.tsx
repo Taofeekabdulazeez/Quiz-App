@@ -3,6 +3,12 @@ import { User } from "../interfaces/interface";
 import { useDeleteUser } from "../hooks/useDeleteUser";
 import { FormEvent, useState } from "react";
 import { useEditUser } from "../hooks/useEditUser";
+import ActionButton from "../ui/ActionButton";
+import FlexRow from "../ui/FlexRow";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { FiEdit, FiEye } from "react-icons/fi";
+import Heading from "../ui/Heading";
+import { HiDotsVertical } from "react-icons/hi";
 
 type UserItemProps = {
   user: User;
@@ -24,21 +30,33 @@ function UserItem({ user }: UserItemProps) {
 
   return (
     <>
-      <li className="user">
-        <span>{user.name}</span>
-        <div>
-          <button
+      <FlexRow as="li" $gap="6rem">
+        <Heading>{user.name}</Heading>
+        <FlexRow>
+          <ActionButton
+            $type="edit"
             disabled={isEditing}
             onClick={() => setShowForm((show) => !show)}
           >
-            {isEditing ? "updating" : `${showForm ? "cancel" : "edit"}`}
-          </button>
-          <button onClick={() => deleteUser(user._id)}>
-            {isDeleting ? <span className="loader"></span> : "delete"}
-          </button>
-          <button onClick={() => navigate(`/users/${user._id}`)}>View</button>
-        </div>
-      </li>
+            <FiEdit size={16} />
+            {isEditing ? "Updating" : `${showForm ? "Cancel" : "Edit"}`}
+          </ActionButton>
+          <ActionButton $type="delete" onClick={() => deleteUser(user._id)}>
+            <RiDeleteBinLine size={16} />
+            {isDeleting ? <span className="loader"></span> : "Delete"}
+          </ActionButton>
+          <ActionButton
+            $type="view"
+            onClick={() => navigate(`/users/${user._id}`)}
+          >
+            <FiEye size={16} />
+            View
+          </ActionButton>
+          <ActionButton>
+            <HiDotsVertical size={16} />
+          </ActionButton>
+        </FlexRow>
+      </FlexRow>
       {showForm && (
         <form onSubmit={handleSubmit} className="form">
           <div>

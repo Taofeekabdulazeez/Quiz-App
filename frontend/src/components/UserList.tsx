@@ -1,6 +1,35 @@
 import UserItem from "./UserItem";
 import CreateForm from "./CreateForm";
 import { useUsers } from "../hooks/useUsers";
+import styled from "styled-components";
+
+const List = styled.ul`
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  /* max-width: 60rem; */
+  /* width: 80%; */
+  border: 1px solid var(--color-gray-200);
+  margin-inline: auto;
+  background-color: var(--bg-layer-1);
+  border-radius: 13px;
+  margin-top: 6rem;
+  overflow: hidden;
+
+  & li {
+    padding: 1.6rem 1.2rem;
+    border-bottom: 1px solid var(--color-gray-200);
+    padding-block: 1rem;
+
+    &:hover {
+      background-color: var(--bg-layer-1);
+    }
+  }
+
+  & li:last-child {
+    border: none;
+  }
+`;
 
 function UserList() {
   const { isLoading, users, error } = useUsers();
@@ -11,11 +40,11 @@ function UserList() {
 
   return (
     <>
-      <ul className="user-list">
+      <List className="user-list">
         {users?.map((user) => (
           <UserItem key={user._id} user={user} />
         ))}
-      </ul>
+      </List>
       <CreateForm />
     </>
   );

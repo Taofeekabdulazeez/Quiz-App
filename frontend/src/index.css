@@ -1,4 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"); */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 :root {
   --color-gray-50: #ffffff;
@@ -13,6 +15,7 @@
   --color-gray-800: #222222;
   --color-gray-900: #000000;
 
+  --color-blue-50: #e9f6fe;
   --color-blue-100: #e0f2ff;
   --color-blue-200: #cae8ff;
   --color-blue-300: #b5deff;
@@ -26,6 +29,20 @@
   --color-blue-1100: #004491;
   --color-blue-1200: #003571;
   --color-blue-1300: #002754;
+
+  --color-red-100: #ffebe7;
+  --color-red-200: #ffddd6;
+  --color-red-300: #ffcdc3;
+  --color-red-400: #ffb7a9;
+  --color-red-500: #ff9b88;
+  --color-red-600: #ff7c65;
+  --color-red-700: #f75c46;
+  --color-red-800: #ea3829;
+  --color-red-900: #d31510;
+  --color-red-1000: #b40000;
+  --color-red-1100: #930000;
+  --color-red-1200: #740000;
+  --color-red-1300: #590000;
 
   --font-size-50: 1.1rem;
   --font-size-75: 1.2rem;
@@ -43,9 +60,9 @@
   --font-size-1200: 5rem;
   --font-size-1300: 6rem;
 
-  --bg-base: var(--color-gray-200);
-  --bg-layer-1: var(--color-gray-100);
-  --bg-layer-2: var(--color-gray-50);
+  --bg-base: var(--color-gray-100);
+  --bg-layer-1: var(--color-gray-50);
+  --bg-layer-2: var(--color-gray-75);
 
   --font-size-xxxl: var(--font-size-1300);
   --font-size-xxl: var(--font-size-1100);
@@ -57,7 +74,7 @@
   --font-size-xxs: var(--font-size-100);
   --font-size-base: var(--font-size-100);
 
-  --font-family-body: "Poppins";
+  --font-family-body: "Inter";
   --line-height-body: 1.5;
 }
 
@@ -94,6 +111,7 @@
   --color-gray-800: #ebebeb;
   --color-gray-900: #ffffff;
 
+  --color-blue-50: #01254f;
   --color-blue-100: #002651;
   --color-blue-200: #00326a;
   --color-blue-300: #004087;
@@ -108,9 +126,29 @@
   --color-blue-1200: #b3defe;
   --color-blue-1300: #ceeaff;
 
-  --bg-base: var(--color-gray-50);
-  --bg-layer-1: var(--color-gray-75);
-  --bg-layer-2: var(--color-gray-100);
+  --color-red-100: #570000;
+  --color-red-200: #6e0000;
+  --color-red-300: #8a0000;
+  --color-red-400: #a70000;
+  --color-red-500: #c40706;
+  --color-red-600: #dd2118;
+  --color-red-700: #ee4331;
+  --color-red-800: #f9634c;
+  --color-red-900: #ff816b;
+  --color-red-1000: #ff9e8c;
+  --color-red-1100: #ffb7a9;
+  --color-red-1200: #ffcdc3;
+  --color-red-1300: #ffdfd9;
+
+  --bg-base: var(--color-gray-100);
+  --bg-layer-1: var(--color-gray-50);
+  --bg-layer-2: var(--color-gray-75);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html {
@@ -120,8 +158,13 @@ html {
 
 body {
   font-family: var(--font-family-body), sans-serif;
+  /* background-color: var(--bg-base); */
   background-color: var(--bg-base);
   font-size: var(--font-size-base);
   color: var(--color-gray-700);
   line-height: var(--line-height-body);
+}
+
+.active {
+  background-color: var(--color-layer-1);
 }

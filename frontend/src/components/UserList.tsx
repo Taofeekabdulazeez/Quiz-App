@@ -7,13 +7,10 @@ const List = styled.ul`
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  /* max-width: 60rem; */
-  /* width: 80%; */
   border: 1px solid var(--color-gray-200);
   margin-inline: auto;
   background-color: var(--bg-layer-1);
   border-radius: 13px;
-  margin-top: 6rem;
   overflow: hidden;
 
   & li {

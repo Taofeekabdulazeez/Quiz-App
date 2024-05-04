@@ -7,12 +7,14 @@ import Settings from "./components/Settings";
 import Login from "./Pages/Login";
 import Results from "./components/Results";
 import Uploads from "./components/Uploads";
+import HomePage from "./Pages/Home/HomePage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index path="login" element={<Login />} />
+        <Route index path="home" element={<HomePage />} />
+        <Route path="login" element={<Login />} />
         <Route element={<AppLayout />}>
           <Route index element={<Navigate replace to="dashboard" />} />
           <Route path="dashboard" element={<Dashboard />} />

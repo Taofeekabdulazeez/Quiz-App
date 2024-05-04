@@ -1,5 +1,11 @@
+import ResultList from "./ResultList";
+
 function Results() {
-  return <div>Results</div>;
+  return (
+    <div>
+      <ResultList />
+    </div>
+  );
 }
 
 export default Results;

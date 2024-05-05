@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const QuestionSchema = new Schema(
+export const QuestionSchema = new Schema(
   {
     question: String,
     options: Array,

@@ -198,3 +198,17 @@ body {
 .active {
   background-color: var(--color-layer-1);
 }
+
+@keyframes animloader {
+  to {
+    background-position: 200px 0, center 0;
+  }
+}
+
+:root {
+  --loader-gray: #eeeeeeeb;
+}
+
+:root.dark-mode {
+  --loader-gray: #383838;
+}

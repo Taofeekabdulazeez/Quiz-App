@@ -1,5 +1,11 @@
+import TableLoader from "../ui/TableLoader";
+
 function Uploads() {
-  return <div>Uploads</div>;
+  return (
+    <div>
+      <TableLoader rows={7} />
+    </div>
+  );
 }
 
 export default Uploads;

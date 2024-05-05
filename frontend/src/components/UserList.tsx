@@ -2,6 +2,7 @@ import { useUsers } from "../hooks/useUsers";
 import styled, { css } from "styled-components";
 import ActionButton from "../ui/ActionButton";
 import { BiDotsVerticalRounded } from "react-icons/bi";
+import TableLoader from "../ui/TableLoader";
 
 export default UserList;
 
@@ -77,7 +78,7 @@ const Tag = styled.span<{ $type: string }>`
 function UserList() {
   const { isLoading, users, error } = useUsers();
 
-  if (isLoading) return <strong>Loading users</strong>;
+  if (isLoading) return <TableLoader />;
 
   if (error) return <strong>Couldn't get users</strong>;
   return (

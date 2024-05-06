@@ -1,9 +1,11 @@
+import { Outlet } from "react-router-dom";
 import TableLoader from "../ui/TableLoader";
 
 function Uploads() {
   return (
     <div>
-      <TableLoader rows={7} />
+      {false && <TableLoader rows={7} />}
+      <Outlet />
     </div>
   );
 }

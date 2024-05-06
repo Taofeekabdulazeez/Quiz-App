@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const StyledMain = styled.main`
   padding: 3.2rem;
+  overflow-y: scroll;
 `;
 
 type MainProps = {

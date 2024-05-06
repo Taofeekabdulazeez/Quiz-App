@@ -8,6 +8,8 @@ import Login from "./Pages/Login";
 import Results from "./components/Results";
 import Uploads from "./components/Uploads";
 import HomePage from "./Pages/Home/HomePage";
+import Questions from "./components/Questions";
+import Question from "./components/Question";
 
 function App() {
   return (
@@ -22,7 +24,11 @@ function App() {
           <Route path="users/:userId" element={<UserOverview />} />
           <Route path="settings" element={<Settings />} />
           <Route path="results" element={<Results />} />
-          <Route path="uploads" element={<Uploads />} />
+          <Route path="uploads" element={<Uploads />}>
+            <Route index element={<Navigate replace to="questions" />} />
+            <Route path="questions" element={<Questions />} />
+            <Route path="questions/:id" element={<Question />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

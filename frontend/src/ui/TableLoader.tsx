@@ -4,7 +4,7 @@ const TableContainer = styled.table`
   overflow: hidden;
   border-radius: 13px;
   width: 100%;
-  border: 1px solid var(--color-gray-200);
+  border-radius: 21px;
 `;
 
 const Thead = styled.thead`
@@ -56,13 +56,27 @@ const Td = styled.td`
     height: 100%;
     top: 0;
     left: 0;
-    background-image: linear-gradient(
+    /* background-image: linear-gradient(
         90deg,
         transparent,
         var(--loader-gray) 50%,
         transparent 100%
       ),
-      linear-gradient(var(--color-gray-200) 50px, transparent 0);
+      linear-gradient(var(--color-gray-200) 50px, transparent 0); */
+    background: linear-gradient(
+        0.25turn,
+        transparent,
+        var(--loader-gray),
+        transparent
+      ),
+      linear-gradient(var(--color-gray-200), var(--color-gray-200)),
+      radial-gradient(
+        38px circle at 19px 19px,
+        var(--color-gray-200) 50%,
+        transparent 51%
+      ),
+      linear-gradient(var(--color-gray-200), var(--color-gray-200));
+    background-color: var(--loader-gray);
     background-repeat: no-repeat;
     background-position: -185px 0, center 0;
     animation: animloader 1s linear infinite;

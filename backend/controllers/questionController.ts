@@ -14,3 +14,13 @@ export async function createQuestion(request: Request, response: Response) {
     console.log(error);
   }
 }
+
+export async function getAllQuestions(request: Request, response: Response) {
+  try {
+    const questions = await Question.find();
+
+    response.status(200).json(questions);
+  } catch (error) {
+    console.log(error);
+  }
+}

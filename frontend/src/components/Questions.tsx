@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import QuestionList from "./QuestionList";
-import Question from "./Question";
+import QuestionOverview from "./QuestionOverview";
 
 const Container = styled.div`
   display: grid;
@@ -11,7 +11,7 @@ function Questions() {
   return (
     <Container>
       <QuestionList />
-      <Question />;
+      <QuestionOverview />;
     </Container>
   );
 }

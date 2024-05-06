@@ -30,6 +30,7 @@ const Grid = styled.div`
 
 const CheckBox = styled.input`
   accent-color: var(--color-green-600);
+  cursor: pointer;
 `;
 
 type Props = {
@@ -42,11 +43,9 @@ type Props = {
 
 function Option({ isEdit, index, onClick, answer, option }: Props) {
   const [value, setValue] = useState(option);
-  // const [isCheck, setIscheck] = useState(answer === index);
   return (
     <Grid>
       <CheckBox
-        // onChange={() => setIscheck(() => answer === index)}
         disabled={!isEdit}
         type="checkbox"
         checked={answer === index}

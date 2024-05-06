@@ -24,7 +24,7 @@ const Button = styled.button`
   }
 `;
 
-function Question() {
+function QuestionOverview() {
   return (
     <Container>
       <Button>
@@ -36,4 +36,4 @@ function Question() {
   );
 }
 
-export default Question;
+export default QuestionOverview;

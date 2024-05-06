@@ -9,7 +9,7 @@ import Results from "./components/Results";
 import Uploads from "./components/Uploads";
 import HomePage from "./Pages/Home/HomePage";
 import Questions from "./components/Questions";
-import Question from "./components/Question";
+import Question from "./components/QuestionOverview";
 
 function App() {
   return (

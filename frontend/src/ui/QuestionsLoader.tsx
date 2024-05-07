@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const List = styled.ul`
-  max-width: 60rem;
+  /* max-width: 60rem; */
   display: flex;
   flex-direction: column;
   padding: 1rem 2rem;

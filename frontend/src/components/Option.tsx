@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Input = styled.input`
@@ -13,7 +13,8 @@ const Input = styled.input`
   border: 0.2rem solid transparent;
   border-radius: 6px;
 
-  &:focus-visible {
+  &:focus-visible,
+  &:focus {
     border: 0.2rem solid var(--color-blue-800);
   }
 
@@ -30,7 +31,10 @@ const Grid = styled.div`
 
 const CheckBox = styled.input`
   accent-color: var(--color-green-600);
-  cursor: pointer;
+
+  &[type="checkbox"][disabled] {
+    accent-color: var(--color-blue-900);
+  }
 `;
 
 type Props = {
@@ -43,6 +47,12 @@ type Props = {
 
 function Option({ isEdit, index, onClick, answer, option }: Props) {
   const [value, setValue] = useState(option);
+  useEffect(
+    function () {
+      if (!isEdit) setValue(option);
+    },
+    [isEdit, option]
+  );
   return (
     <Grid>
       <CheckBox
@@ -57,6 +67,7 @@ function Option({ isEdit, index, onClick, answer, option }: Props) {
         disabled={!isEdit}
         type="text"
         value={value}
+        autoFocus
       />
     </Grid>
   );

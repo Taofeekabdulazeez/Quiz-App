@@ -95,7 +95,7 @@ function UserList() {
         </thead>
         <Tbody>
           {users?.map((user) => (
-            <Tr>
+            <Tr key={user._id}>
               <Td>
                 <Name>{user.name}</Name>
               </Td>

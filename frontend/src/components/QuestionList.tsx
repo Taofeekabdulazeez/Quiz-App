@@ -4,7 +4,7 @@ import QuestionsLoader from "../ui/QuestionsLoader";
 import QuestionItem from "./QuestionItem";
 
 const List = styled.ul`
-  max-width: 60rem;
+  /* max-width: 60rem; */
   display: flex;
   flex-direction: column;
   padding: 1rem 2rem;
@@ -13,9 +13,10 @@ const List = styled.ul`
 `;
 
 const Heading = styled.h4`
-  margin-left: 2rem;
+  margin-right: 2rem;
   font-weight: 500;
   color: var(--color-gray-800);
+  text-align: right;
 `;
 
 function QuestionList() {

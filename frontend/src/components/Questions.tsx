@@ -4,14 +4,14 @@ import QuestionOverview from "./QuestionOverview";
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 1fr;
 `;
 
 function Questions() {
   return (
     <Container>
       <QuestionList />
-      <QuestionOverview />;
+      {false && <QuestionOverview />}
     </Container>
   );
 }

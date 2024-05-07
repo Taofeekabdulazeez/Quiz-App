@@ -2,8 +2,10 @@ import styled from "styled-components";
 import ActionButton from "../ui/ActionButton";
 import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
 import { Question } from "../interfaces/interface";
-import { useNavigate } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
+import FormEdit from "./FormEdit";
+import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { useQueryClient } from "@tanstack/react-query";
 
 const ListItem = styled.li`
   display: flex;
@@ -36,29 +38,27 @@ type Props = {
 
 function QuestionItem({ question, index }: Props) {
   const { question: q, _id } = question;
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-
-  const handleClick = () => {
-    navigate(`?id=${_id}`);
-    queryClient.invalidateQueries({ queryKey: ["question"] });
-  };
+  const [showForm, setShowForm] = useState(false);
 
   return (
-    <ListItem key={_id}>
-      <Text>
-        <Number>{index + 1}.</Number>{" "}
-        {q.length < 50 ? q : `${q.slice(0, 50)}...`}
-      </Text>
-      <Flex>
-        <ActionButton onClick={handleClick}>
-          <MdOutlineEdit size={16} />
-        </ActionButton>
-        <ActionButton $color="var(--color-red-900)">
-          <MdOutlineDelete size={16} />
-        </ActionButton>
-      </Flex>
-    </ListItem>
+    <>
+      <ListItem key={_id}>
+        <Text>
+          <Number>{index + 1}.</Number>{" "}
+          {/* {q.length < 50 ? q : `${q.slice(0, 50)}...`} */}
+          {q}
+        </Text>
+        <Flex>
+          <ActionButton onClick={() => setShowForm((show) => !show)}>
+            <MdOutlineEdit size={16} />
+          </ActionButton>
+          <ActionButton $color="var(--color-red-900)">
+            <MdOutlineDelete size={16} />
+          </ActionButton>
+        </Flex>
+      </ListItem>
+      {showForm && <FormEdit data={question} />}
+    </>
   );
 }
 

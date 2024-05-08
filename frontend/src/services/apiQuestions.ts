@@ -28,3 +28,11 @@ export async function deleteQuestion(id: string): Promise<null> {
 
   return null;
 }
+
+export async function uploadQuestion(data: {
+  question: string;
+  options: string[];
+  correctOption: number;
+}) {
+  await axios.post(API_URL, data);
+}

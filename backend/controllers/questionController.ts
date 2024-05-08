@@ -4,11 +4,7 @@ import { Request, Response } from "express";
 
 export async function createQuestion(request: Request, response: Response) {
   try {
-    const newQuestion = await Question.create({
-      question: "What is your name?",
-      options: ["Yusuf", "Muhammed", "Taofeek", "Basheer"],
-      correctOption: 2,
-    });
+    const newQuestion = await Question.create(request.body);
 
     return response.status(200).json(newQuestion);
   } catch (error) {

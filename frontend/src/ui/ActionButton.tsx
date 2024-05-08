@@ -8,7 +8,7 @@ const ActionButton = styled.button<{
 }>`
   border: 0;
   padding: 0.6rem 1rem;
-  font-weight: 600;
+  font-weight: 500;
   font-size: ${(props) => props.$fontSize || `var(--font-size-xxs)`};
   color: ${(props) => props.$color || `var(--color-gray-700)`};
   background-color: ${(props) => props.$backgroundColor || `var(--bg-layer-1)`};

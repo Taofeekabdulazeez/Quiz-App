@@ -207,6 +207,9 @@ body {
 
 :root {
   --loader-gray: #eeeeeeeb;
+  --color-primary: #0567b7;
+  --color-text: #333;
+  --color-bg-900: #fff;
 }
 
 :root.dark-mode {

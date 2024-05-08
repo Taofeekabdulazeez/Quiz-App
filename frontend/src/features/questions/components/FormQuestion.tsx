@@ -1,10 +1,12 @@
 import ActionButton from "../../../ui/ActionButton";
 import styled from "styled-components";
-import { ChangeEvent, FormEvent, useState } from "react";
-import Option from "../../../components/Option";
 import ButtonLoader from "../../../ui/ButtonLoader";
+import { useFieldArray, useForm } from "react-hook-form";
+import CheckBox from "./CheckBox";
+import { MdClose } from "react-icons/md";
+import { useState } from "react";
 import { useEditQuestion } from "../hooks/useEditQuestion";
-import { useQueryClient } from "@tanstack/react-query";
+import { useUploadQuestion } from "../hooks/useUploadQuestion";
 
 const Form = styled.form`
   width: 50rem;
@@ -26,8 +28,9 @@ const H4 = styled.h4`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1rem;
+  grid-template-columns: auto 1fr auto;
+  gap: 2rem;
+  align-items: center;
 `;
 
 const TextArea = styled.textarea`
@@ -57,6 +60,40 @@ const FlexRol = styled.div`
   gap: 1rem;
 `;
 
+const Input = styled.input`
+  border: 1px solid var(--color-gray-200);
+  background-color: var(--bg-base);
+  border: 0;
+  padding: 0.6rem;
+  color: var(--color-gray-700);
+  font-family: inherit;
+  letter-spacing: 0.5px;
+  outline: 0;
+  border: 0.2rem solid transparent;
+  border-radius: 6px;
+
+  &:focus-visible,
+  &:focus {
+    border: 0.2rem solid var(--color-blue-800);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+`;
+
+const CenterFlex = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+type FormData = {
+  question: string;
+  options: { option: string }[];
+  correctOption: number;
+};
+
 type FormProps = {
   data?: {
     _id: string;
@@ -67,90 +104,131 @@ type FormProps = {
   onCloseModal?: () => void;
 };
 
-function FormQuestion({
-  data = { question: "", options: [""], correctOption: 0, _id: "" },
-  onCloseModal,
-}: FormProps) {
-  const { options, question, correctOption, _id } = data;
-  // const [isEdit, setIsEdit] = useState(true);
-  const [newQuestion, setNewQuestion] = useState(question);
-  const [answer, setAnswer] = useState(correctOption);
+const editData = {
+  question: "",
+  options: [],
+  correctOption: 0,
+  _id: "",
+};
+
+function FormQuestion({ data = editData, onCloseModal }: FormProps) {
+  const isEditSession = data.question !== "";
+  console.log(isEditSession);
+
+  const { options, question, correctOption, _id: id } = data;
+  const [newAnswer, setNewAnswer] = useState(correctOption);
+  const { isUploading, uploadQuestion } = useUploadQuestion();
   const { isEditing, editQuestion } = useEditQuestion();
 
-  const handleAnswer = (index: number) => setAnswer(() => index);
-  const handleQuestion = (event: ChangeEvent<HTMLTextAreaElement>) =>
-    setNewQuestion(event.target.value);
-
-  const queryClient = useQueryClient();
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    editQuestion(
-      {
-        id: _id,
-        data: {
-          question: newQuestion,
-          options,
-          correctOption: answer,
-        },
-      },
-      { onSuccess: () => onCloseModal?.() }
-    );
-    queryClient.invalidateQueries({ queryKey: ["questions"] });
+  const defaultValues: FormData = {
+    question,
+    correctOption,
+    options: options.map((opt) => ({ option: opt })),
   };
+
+  const { register, handleSubmit, control, reset } = useForm<FormData>({
+    defaultValues,
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "options",
+  });
+
+  const onSubmit = (data: FormData) => {
+    const { question, options } = data;
+    const newData = {
+      question,
+      correctOption: newAnswer,
+      options: options.map((opt) => opt.option),
+    };
+    console.log(isEditSession);
+
+    if (isEditSession)
+      editQuestion(
+        {
+          id,
+          data: newData,
+        },
+        { onSuccess: () => onCloseModal?.() }
+      );
+    else uploadQuestion(newData, { onSuccess: () => onCloseModal?.() });
+  };
+
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <H4>Question</H4>
-      <Grid>
-        <span></span>
-        <TextArea
-          disabled={isEditing}
-          spellCheck={false}
-          value={newQuestion}
-          onChange={handleQuestion}
-        ></TextArea>
-      </Grid>
-      <div>
-        <FlexCol>
-          <H4>Options</H4>
-          {options.map((option, index) => (
-            <Option
-              key={index}
-              option={option}
-              isEditing={isEditing}
-              index={index}
-              answer={answer as number}
-              onClick={handleAnswer}
-            ></Option>
-          ))}
-        </FlexCol>
-        <FlexRol>
-          <ActionButton
-            type="reset"
-            $type="edit"
-            onClick={() => {
-              onCloseModal?.();
-            }}
-          >
-            Cancel
-          </ActionButton>
-          <ActionButton
-            $type="view"
-            onClick={() => {
-              if (isEditing) onCloseModal?.();
-            }}
-          >
-            {isEditing ? (
-              <>
-                <span>Saving</span>
-                <ButtonLoader />
-              </>
-            ) : (
-              "Save"
-            )}
-          </ActionButton>
-        </FlexRol>
-      </div>
+      <TextArea spellCheck={false} {...register("question")}></TextArea>
+      <H4>Options</H4>
+      <FlexCol>
+        {fields.map((field, index) => (
+          <Grid key={field.id}>
+            <CheckBox
+              isChecked={index === newAnswer}
+              onClick={() => setNewAnswer(index)}
+            />
+            <Input
+              type="text"
+              key={field.id} // important to include key with field's id
+              {...register(`options.${index}.option` as const)}
+              disabled={isEditing || isUploading}
+            />
+            <ActionButton
+              type="button"
+              disabled={isEditing || isUploading}
+              onClick={() => remove(index)}
+            >
+              <MdClose />
+            </ActionButton>
+          </Grid>
+        ))}
+      </FlexCol>
+      <CenterFlex>
+        <ActionButton
+          type="button"
+          disabled={isEditing || isUploading}
+          $backgroundColor="var(--color-gray-100)"
+          $fontSize="1.2rem"
+          onClick={() => append({ option: "" })}
+        >
+          Add Option
+        </ActionButton>
+      </CenterFlex>
+      <FlexRol>
+        <ActionButton
+          disabled={isEditing || isUploading}
+          type="button"
+          $type="edit"
+          onClick={() => {
+            reset();
+            onCloseModal?.();
+          }}
+        >
+          Cancel
+        </ActionButton>
+        <ActionButton
+          type="submit"
+          $type="view"
+          disabled={isEditing || isUploading}
+        >
+          {isEditing ? (
+            <>
+              <span>Saving</span>
+              <ButtonLoader />
+            </>
+          ) : (
+            isEditSession && "Save"
+          )}
+          {isUploading ? (
+            <>
+              <span>Uploading</span>
+              <ButtonLoader />
+            </>
+          ) : (
+            !isEditSession && "Add"
+          )}
+        </ActionButton>
+      </FlexRol>
     </Form>
   );
 }

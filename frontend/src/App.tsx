@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import QuizProvider from "./redux/store";
 import Users from "./features/users/components/Users";
 import UserOverview from "./features/users/components/UserOverview";
 import Dashboard from "./Pages/app/Dashboard";
@@ -9,7 +10,7 @@ import Results from "./Pages/app/Results";
 import Uploads from "./Pages/app/Uploads";
 import HomePage from "./Pages/home/HomePage";
 import Questions from "./Pages/app/Questions";
-import Question from "./features/questions/components/QuestionOverview";
+import QuizApp from "./Pages/quiz/QuizApp";
 
 function App() {
   return (
@@ -17,6 +18,14 @@ function App() {
       <Routes>
         <Route index path="home" element={<HomePage />} />
         <Route path="login" element={<Login />} />
+        <Route
+          path="quiz"
+          element={
+            <QuizProvider>
+              <QuizApp />
+            </QuizProvider>
+          }
+        />
         <Route element={<AppLayout />}>
           <Route index element={<Navigate replace to="dashboard" />} />
           <Route path="dashboard" element={<Dashboard />} />
@@ -27,7 +36,6 @@ function App() {
           <Route path="uploads" element={<Uploads />}>
             <Route index element={<Navigate replace to="questions" />} />
             <Route path="questions" element={<Questions />} />
-            <Route path="questions/:id" element={<Question />} />
           </Route>
         </Route>
       </Routes>

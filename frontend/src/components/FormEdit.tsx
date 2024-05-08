@@ -1,13 +1,14 @@
 import ActionButton from "../ui/ActionButton";
 import styled from "styled-components";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import Option from "./Option";
 import ButtonLoader from "../ui/ButtonLoader";
+import { useEditQuestion } from "../hooks/useEditQuestion";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Form = styled.form`
-  margin-top: 3rem;
+  width: 50rem;
   background-color: var(--bg-layer-1);
-  padding: 1.2rem;
   border-radius: 9px;
 `;
 
@@ -20,7 +21,7 @@ const FlexCol = styled.div`
 
 const H4 = styled.h4`
   font-weight: 500;
-  margin-top: 2rem;
+  margin-bottom: 1rem;
 `;
 
 const Grid = styled.div`
@@ -39,6 +40,7 @@ const TextArea = styled.textarea`
   outline: 0;
   border-radius: 6px;
   width: 100%;
+  margin-bottom: 2rem;
 
   &:focus-visible {
     border: 0.2rem solid var(--color-blue-800);
@@ -57,29 +59,46 @@ const FlexRol = styled.div`
 
 type FormProps = {
   data: {
+    _id: string;
     question: string;
     options: string[];
     correctOption: number;
   };
+  onCloseModal?: () => void;
 };
 
-function FormEdit({ data }: FormProps) {
-  const { options, question, correctOption } = data;
-  const [isEdit, setIsEdit] = useState(true);
+function FormEdit({ data, onCloseModal }: FormProps) {
+  const { options, question, correctOption, _id } = data;
+  // const [isEdit, setIsEdit] = useState(true);
   const [newQuestion, setNewQuestion] = useState(question);
   const [answer, setAnswer] = useState(correctOption);
+  const { isEditing, editQuestion } = useEditQuestion();
 
   const handleAnswer = (index: number) => setAnswer(() => index);
   const handleQuestion = (event: ChangeEvent<HTMLTextAreaElement>) =>
     setNewQuestion(event.target.value);
 
+  const queryClient = useQueryClient();
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    editQuestion({
+      id: _id,
+      data: {
+        question: newQuestion,
+        options,
+        correctOption: answer,
+      },
+    });
+    queryClient.invalidateQueries({ queryKey: ["questions"] });
+  };
   return (
-    <Form onSubmit={(event) => event.preventDefault()}>
+    <Form onSubmit={handleSubmit}>
       <H4>Question</H4>
       <Grid>
-        <span>1.</span>
+        <span></span>
         <TextArea
-          disabled={!isEdit}
+          disabled={isEditing}
           spellCheck={false}
           value={newQuestion}
           onChange={handleQuestion}
@@ -92,7 +111,7 @@ function FormEdit({ data }: FormProps) {
             <Option
               key={index}
               option={option}
-              isEdit={isEdit}
+              isEditing={isEditing}
               index={index}
               answer={answer as number}
               onClick={handleAnswer}
@@ -101,20 +120,17 @@ function FormEdit({ data }: FormProps) {
         </FlexCol>
         <FlexRol>
           <ActionButton
+            type="reset"
             $type="edit"
             onClick={() => {
-              setAnswer(correctOption);
-              setNewQuestion(question);
-              setIsEdit((edit) => !edit);
+              onCloseModal?.();
             }}
           >
-            {isEdit ? "cancel" : "Edit"}
+            Cancel
           </ActionButton>
-          {isEdit && (
-            <ActionButton $type="view">
-              Save {false && <ButtonLoader />}
-            </ActionButton>
-          )}
+          <ActionButton $type="view" onClick={() => {}}>
+            {isEditing ? <ButtonLoader /> : "save"}
+          </ActionButton>
         </FlexRol>
       </div>
     </Form>

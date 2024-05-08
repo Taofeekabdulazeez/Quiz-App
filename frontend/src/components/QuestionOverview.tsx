@@ -1,6 +1,6 @@
 import { MdAdd } from "react-icons/md";
 import styled from "styled-components";
-import FormAddQ from "./FormAddQ";
+import Modal from "../ui/Modal";
 
 const Container = styled.div`
   background-color: var(--bg-layer-1);
@@ -27,11 +27,15 @@ const Button = styled.button`
 function QuestionOverview() {
   return (
     <Container>
-      <Button>
-        <MdAdd size={20} />
-        Add Question
-      </Button>
-      <FormAddQ />
+      <Modal>
+        <Modal.Open opens="question-form">
+          <Button>
+            <MdAdd size={18} />
+            Add new cabin
+          </Button>
+        </Modal.Open>
+        <Modal.Window name="question-form">edit cabin</Modal.Window>
+      </Modal>
     </Container>
   );
 }

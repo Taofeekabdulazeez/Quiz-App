@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 const Input = styled.input`
@@ -38,25 +38,20 @@ const CheckBox = styled.input`
 `;
 
 type Props = {
-  isEdit: boolean;
+  isEditing: boolean;
   answer: number;
   index: number;
   option: string;
   onClick: (arg: number) => void;
 };
 
-function Option({ isEdit, index, onClick, answer, option }: Props) {
+function Option({ isEditing, index, onClick, answer, option }: Props) {
   const [value, setValue] = useState(option);
-  useEffect(
-    function () {
-      if (!isEdit) setValue(option);
-    },
-    [isEdit, option]
-  );
+
   return (
     <Grid>
       <CheckBox
-        disabled={!isEdit}
+        disabled={isEditing}
         type="checkbox"
         checked={answer === index}
         onClick={() => onClick(index)}
@@ -64,7 +59,7 @@ function Option({ isEdit, index, onClick, answer, option }: Props) {
       <Input
         spellCheck={false}
         onChange={(event) => setValue(event.target.value)}
-        disabled={!isEdit}
+        disabled={isEditing}
         type="text"
         value={value}
         autoFocus

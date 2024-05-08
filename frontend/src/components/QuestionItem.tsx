@@ -3,7 +3,9 @@ import ActionButton from "../ui/ActionButton";
 import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
 import { Question } from "../interfaces/interface";
 import FormEdit from "./FormEdit";
-import { useState } from "react";
+import Modal from "../ui/Modal";
+import DeletePopup from "./DeletePopup";
+import { useDeleteQuestion } from "../hooks/useDeleteQuestion";
 // import { useNavigate } from "react-router-dom";
 // import { useQueryClient } from "@tanstack/react-query";
 
@@ -38,7 +40,7 @@ type Props = {
 
 function QuestionItem({ question, index }: Props) {
   const { question: q, _id } = question;
-  const [showForm, setShowForm] = useState(false);
+  const { isDeleting, deletQuestion } = useDeleteQuestion();
 
   return (
     <>
@@ -48,16 +50,31 @@ function QuestionItem({ question, index }: Props) {
           {/* {q.length < 50 ? q : `${q.slice(0, 50)}...`} */}
           {q}
         </Text>
-        <Flex>
-          <ActionButton onClick={() => setShowForm((show) => !show)}>
-            <MdOutlineEdit size={16} />
-          </ActionButton>
-          <ActionButton $color="var(--color-red-900)">
-            <MdOutlineDelete size={16} />
-          </ActionButton>
-        </Flex>
+        <Modal>
+          <Flex>
+            <Modal.Open opens="form">
+              <ActionButton>
+                <MdOutlineEdit size={16} />
+              </ActionButton>
+            </Modal.Open>
+            <Modal.Window name="form">
+              <FormEdit data={question} />
+            </Modal.Window>
+            <Modal.Open opens="delete">
+              <ActionButton $color="var(--color-red-900)">
+                <MdOutlineDelete size={16} />
+              </ActionButton>
+            </Modal.Open>
+            <Modal.Window name="delete">
+              <DeletePopup
+                onConfirm={() => deletQuestion(_id)}
+                disabled={isDeleting}
+                resourceName="Question"
+              />
+            </Modal.Window>
+          </Flex>
+        </Modal>
       </ListItem>
-      {showForm && <FormEdit data={question} />}
     </>
   );
 }

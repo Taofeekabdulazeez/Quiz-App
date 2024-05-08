@@ -13,3 +13,18 @@ export async function getQuestion(id: string): Promise<Question> {
 
   return data;
 }
+
+export async function editQuestion(
+  id: string,
+  data: Question
+): Promise<Question> {
+  const { data: question } = await axios.put(`${API_URL}/${id}`, data);
+
+  return question;
+}
+
+export async function deleteQuestion(id: string): Promise<null> {
+  await axios.delete(`${API_URL}/${id}`);
+
+  return null;
+}

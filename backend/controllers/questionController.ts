@@ -36,3 +36,23 @@ export async function getQuestion(request: Request, response: Response) {
     console.log(error);
   }
 }
+
+export async function editQuestion(request: Request, response: Response) {
+  try {
+    const { id } = request.params;
+    const question = await Question.findByIdAndUpdate(id, request.body);
+    response.status(200).json(question);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function deleteQuestion(request: Request, response: Response) {
+  try {
+    const { id } = request.params;
+    await Question.findByIdAndDelete(id);
+    response.status(204).json(null);
+  } catch (error) {
+    console.log(error);
+  }
+}

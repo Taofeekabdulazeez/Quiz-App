@@ -10,7 +10,9 @@ const Container = styled.div`
 `;
 
 const Heading = styled.h3``;
-const Message = styled.p``;
+const Message = styled.p`
+  margin-bottom: 1.2rem;
+`;
 const Flex = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -24,7 +26,7 @@ type DeleteProps = {
   onCloseModal?: () => void;
 };
 
-function DeletePopup({
+function ConfirmDelete({
   resourceName,
   onConfirm,
   disabled,
@@ -39,7 +41,14 @@ function DeletePopup({
       </Message>
       <Flex>
         <ActionButton onClick={onCloseModal}>Cancel</ActionButton>
-        <ActionButton onClick={onConfirm} disabled={disabled} $type="delete">
+        <ActionButton
+          onClick={() => {
+            onConfirm();
+            if (disabled) onCloseModal?.();
+          }}
+          disabled={disabled}
+          $type="delete"
+        >
           {disabled ? <ButtonLoader /> : "Delete"}
         </ActionButton>
       </Flex>
@@ -47,4 +56,4 @@ function DeletePopup({
   );
 }
 
-export default DeletePopup;
+export default ConfirmDelete;

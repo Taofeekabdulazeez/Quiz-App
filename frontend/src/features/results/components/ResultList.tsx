@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import ActionButton from "../ui/ActionButton";
+import ActionButton from "../../../ui/ActionButton";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 
 const TableContainer = styled.div`

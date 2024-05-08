@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { editQuestion as editQuestionApi } from "../services/apiQuestions";
+import { editQuestion as editQuestionApi } from "../../../services/apiQuestions";
+import toast from "react-hot-toast";
 
 type MutationParams = {
   id: string;
@@ -13,19 +14,17 @@ export function useEditQuestion() {
     isPending: isEditing,
     mutate: editQuestion,
     error,
+    isSuccess,
   } = useMutation({
     mutationFn: ({ id, data }: MutationParams) => editQuestionApi(id, data),
     onSuccess: () => {
+      toast.success("Question successfully edited!");
       queryClient.invalidateQueries({
-        queryKey: ["questions", "question"],
+        queryKey: ["questions"],
       });
     },
-    onSettled: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["questions", "question"],
-      });
-    },
+    onError: () => toast.error("Question could not be edited!"),
   });
 
-  return { isEditing, editQuestion, error };
+  return { isEditing, editQuestion, error, isSuccess };
 }

@@ -1,4 +1,4 @@
-import ThemeButton from "./ThemeButton";
+import ThemeButton from "../components/ThemeButton";
 import styled from "styled-components";
 
 const StyledHeader = styled.header`

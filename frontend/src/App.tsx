@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Users from "./components/Users";
-import UserOverview from "./components/UserOverview";
-import Dashboard from "./components/Dashboard";
+import Users from "./features/users/components/Users";
+import UserOverview from "./features/users/components/UserOverview";
+import Dashboard from "./Pages/app/Dashboard";
 import AppLayout from "./ui/AppLayout";
-import Settings from "./components/Settings";
-import Login from "./Pages/Login";
-import Results from "./components/Results";
-import Uploads from "./components/Uploads";
-import HomePage from "./Pages/Home/HomePage";
-import Questions from "./components/Questions";
-import Question from "./components/QuestionOverview";
+import Settings from "./Pages/app/Settings";
+import Login from "./Pages/login/Login";
+import Results from "./Pages/app/Results";
+import Uploads from "./Pages/app/Uploads";
+import HomePage from "./Pages/home/HomePage";
+import Questions from "./Pages/app/Questions";
+import Question from "./features/questions/components/QuestionOverview";
 
 function App() {
   return (

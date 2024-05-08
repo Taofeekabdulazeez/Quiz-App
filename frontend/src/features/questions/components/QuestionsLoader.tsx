@@ -32,12 +32,6 @@ const List = styled.ul`
   }
 `;
 
-const Heading = styled.h4`
-  margin-left: 2rem;
-  font-weight: 500;
-  color: var(--color-gray-800);
-`;
-
 type Props = {
   rows?: number;
 };
@@ -46,7 +40,6 @@ function QuestionsLoader({ rows = 15 }: Props) {
   const dataRows = Array.from({ length: rows }, (_, index) => index);
   return (
     <div>
-      <Heading>Edit/Delete question</Heading>
       <List>
         {dataRows.map((row) => (
           <li key={row}></li>

@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { useQuestions } from "../hooks/useQuestions";
-import QuestionsLoader from "../ui/QuestionsLoader";
+import QuestionsLoader from "./QuestionsLoader";
 import QuestionItem from "./QuestionItem";
+import ActionButton from "../../../ui/ActionButton";
+import Modal from "../../../components/Modal";
+import FormQuestion from "./FormQuestion";
 
 const List = styled.ul`
   /* max-width: 60rem; */
@@ -19,6 +22,13 @@ const Heading = styled.h4`
   text-align: right;
 `;
 
+const Flex = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+`;
+
 function QuestionList() {
   const { isLoading, questions } = useQuestions();
 
@@ -26,7 +36,17 @@ function QuestionList() {
 
   return (
     <div>
-      <Heading>Edit/Delete question</Heading>
+      <Flex>
+        <Modal>
+          <Modal.Open opens="edit">
+            <ActionButton $type="view">Add New Question</ActionButton>
+          </Modal.Open>
+          <Modal.Window name="edit">
+            <FormQuestion />
+          </Modal.Window>
+        </Modal>
+        <Heading>Edit/Delete question</Heading>
+      </Flex>
       <List>
         {questions.map((question, index) => (
           <QuestionItem key={question._id} question={question} index={index} />

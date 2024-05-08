@@ -12,7 +12,7 @@ const rotation = keyframes`
 const ButtonLoader = styled.span`
   width: 1.6rem;
   height: 1.6rem;
-  border: 0.3rem dotted var(--color-blue-100);
+  border: 0.2rem dotted var(--color-gray-100);
   border-radius: 50%;
   display: inline-block;
   position: relative;

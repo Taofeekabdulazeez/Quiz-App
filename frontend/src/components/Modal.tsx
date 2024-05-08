@@ -6,9 +6,9 @@ import {
   useState,
 } from "react";
 import { createPortal } from "react-dom";
-import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
 import { useOustideClick } from "../hooks/useOutsideClick";
+import { MdClose } from "react-icons/md";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -29,7 +29,8 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(255, 255, 255, 0.1);
+  /* background-color: rgba(255, 255, 255, 0.1); */
+  background-color: #00000027;
   backdrop-filter: blur(4px);
   z-index: 1000;
   transition: all 0.5s;
@@ -118,7 +119,7 @@ function Window({ children, name }: WindowProps) {
     <Overlay>
       <StyledModal ref={ref}>
         <Button onClick={close}>
-          <HiXMark />
+          <MdClose size={20} color="var(--color-gray-900)" />
         </Button>
         <div>{cloneElement(children, { onCloseModal: close })}</div>
       </StyledModal>

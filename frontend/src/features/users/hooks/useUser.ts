@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { getUser } from "../services/apiUsers";
+import { getUser } from "../../../services/apiUsers";
 import { useQuery } from "@tanstack/react-query";
 
 export function useUser() {

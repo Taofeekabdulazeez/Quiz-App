@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import QuestionList from "./QuestionList";
-import QuestionOverview from "./QuestionOverview";
+import QuestionList from "../../features/questions/components/QuestionList";
+import QuestionOverview from "../../features/questions/components/QuestionOverview";
 
 const Container = styled.div`
   display: grid;

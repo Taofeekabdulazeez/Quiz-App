@@ -1,8 +1,8 @@
-import ActionButton from "../ui/ActionButton";
+import ActionButton from "../../../ui/ActionButton";
 import styled from "styled-components";
 import { ChangeEvent, FormEvent, useState } from "react";
-import Option from "./Option";
-import ButtonLoader from "../ui/ButtonLoader";
+import Option from "../../../components/Option";
+import ButtonLoader from "../../../ui/ButtonLoader";
 import { useEditQuestion } from "../hooks/useEditQuestion";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -58,7 +58,7 @@ const FlexRol = styled.div`
 `;
 
 type FormProps = {
-  data: {
+  data?: {
     _id: string;
     question: string;
     options: string[];
@@ -67,7 +67,10 @@ type FormProps = {
   onCloseModal?: () => void;
 };
 
-function FormEdit({ data, onCloseModal }: FormProps) {
+function FormQuestion({
+  data = { question: "", options: [""], correctOption: 0, _id: "" },
+  onCloseModal,
+}: FormProps) {
   const { options, question, correctOption, _id } = data;
   // const [isEdit, setIsEdit] = useState(true);
   const [newQuestion, setNewQuestion] = useState(question);
@@ -82,14 +85,17 @@ function FormEdit({ data, onCloseModal }: FormProps) {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    editQuestion({
-      id: _id,
-      data: {
-        question: newQuestion,
-        options,
-        correctOption: answer,
+    editQuestion(
+      {
+        id: _id,
+        data: {
+          question: newQuestion,
+          options,
+          correctOption: answer,
+        },
       },
-    });
+      { onSuccess: () => onCloseModal?.() }
+    );
     queryClient.invalidateQueries({ queryKey: ["questions"] });
   };
   return (
@@ -128,8 +134,20 @@ function FormEdit({ data, onCloseModal }: FormProps) {
           >
             Cancel
           </ActionButton>
-          <ActionButton $type="view" onClick={() => {}}>
-            {isEditing ? <ButtonLoader /> : "save"}
+          <ActionButton
+            $type="view"
+            onClick={() => {
+              if (isEditing) onCloseModal?.();
+            }}
+          >
+            {isEditing ? (
+              <>
+                <span>Saving</span>
+                <ButtonLoader />
+              </>
+            ) : (
+              "Save"
+            )}
           </ActionButton>
         </FlexRol>
       </div>
@@ -137,4 +155,4 @@ function FormEdit({ data, onCloseModal }: FormProps) {
   );
 }
 
-export default FormEdit;
+export default FormQuestion;

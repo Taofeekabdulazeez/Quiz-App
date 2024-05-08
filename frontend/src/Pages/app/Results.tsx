@@ -1,4 +1,4 @@
-import ResultList from "./ResultList";
+import ResultList from "../../features/results/components/ResultList";
 
 function Results() {
   return (

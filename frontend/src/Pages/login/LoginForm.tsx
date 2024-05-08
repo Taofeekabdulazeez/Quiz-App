@@ -3,7 +3,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { MdErrorOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useDarkMode } from "../contexts/AppThemeContext";
+import { useDarkMode } from "../../contexts/AppThemeContext";
 
 const StyledForm = styled.form`
   display: grid;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "./LoginForm";
 
 const StyledLogin = styled.div`
   width: 50rem;

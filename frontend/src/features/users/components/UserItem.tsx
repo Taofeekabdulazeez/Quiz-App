@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { User } from "../interfaces/interface";
+import { User } from "../../../interfaces/interface";
 import { useDeleteUser } from "../hooks/useDeleteUser";
 import { FormEvent, useState } from "react";
 import { useEditUser } from "../hooks/useEditUser";
-import ActionButton from "../ui/ActionButton";
-import FlexRow from "../ui/FlexRow";
+import ActionButton from "../../../ui/ActionButton";
+import FlexRow from "../../../ui/FlexRow";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FiEdit, FiEye } from "react-icons/fi";
-import Heading from "../ui/Heading";
+import Heading from "../../../ui/Heading";
 import { HiDotsVertical } from "react-icons/hi";
 
 type UserItemProps = {

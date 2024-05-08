@@ -1,6 +1,6 @@
 import { MdAdd } from "react-icons/md";
 import styled from "styled-components";
-import Modal from "../ui/Modal";
+import Modal from "../../../components/Modal";
 
 const Container = styled.div`
   background-color: var(--bg-layer-1);

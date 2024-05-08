@@ -1,8 +1,8 @@
 import { useUsers } from "../hooks/useUsers";
 import styled, { css } from "styled-components";
-import ActionButton from "../ui/ActionButton";
+import ActionButton from "../../../ui/ActionButton";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import TableLoader from "../ui/TableLoader";
+import TableLoader from "../../../ui/TableLoader";
 
 export default UserList;
 

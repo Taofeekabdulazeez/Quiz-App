@@ -1,11 +1,5 @@
-import FormQuestion from "../../features/questions/components/FormQuestion";
-
 function Settings() {
-  return (
-    <div>
-      <FormQuestion />
-    </div>
-  );
+  return <div></div>;
 }
 
 export default Settings;

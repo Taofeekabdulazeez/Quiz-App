@@ -44,6 +44,7 @@ const TextArea = styled.textarea`
   border-radius: 6px;
   width: 100%;
   margin-bottom: 2rem;
+  letter-spacing: 0.3px;
 
   &:focus-visible {
     border: 0.2rem solid var(--color-blue-800);
@@ -169,6 +170,7 @@ function FormQuestion({ data = editData, onCloseModal }: FormProps) {
             />
             <Input
               type="text"
+              autoComplete="false"
               key={field.id} // important to include key with field's id
               {...register(`options.${index}.option` as const)}
               disabled={isEditing || isUploading}

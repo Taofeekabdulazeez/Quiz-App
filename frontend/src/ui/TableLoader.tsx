@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const TableContainer = styled.table`
+const TableContainer = styled.div`
   overflow: hidden;
   border-radius: 13px;
   width: 100%;

@@ -11,6 +11,7 @@ import Uploads from "./Pages/app/Uploads";
 import HomePage from "./Pages/home/HomePage";
 import Questions from "./Pages/app/Questions";
 import QuizApp from "./Pages/quiz/QuizApp";
+import ResultOverview from "./features/results/components/ResultOverview";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="users/:userId" element={<UserOverview />} />
           <Route path="settings" element={<Settings />} />
           <Route path="results" element={<Results />} />
+          <Route path="results/:id" element={<ResultOverview />} />
           <Route path="uploads" element={<Uploads />}>
             <Route index element={<Navigate replace to="questions" />} />
             <Route path="questions" element={<Questions />} />

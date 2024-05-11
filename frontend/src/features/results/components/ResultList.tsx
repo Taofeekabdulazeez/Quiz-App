@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
-import ActionButton from "../../../ui/ActionButton";
-import { BiDotsVerticalRounded } from "react-icons/bi";
+import Menus from "../../../components/Menus";
+import { IoMdEye } from "react-icons/io";
+import { MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const TableContainer = styled.div`
   overflow: hidden;
@@ -106,7 +108,25 @@ const Tag = styled.span<{ $type: string }>`
     `}
 `;
 
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 0;
+  background: none;
+  width: 100%;
+  padding: 1rem 2rem;
+  font-weight: 500;
+  color: var(--color-gray-700);
+
+  &:hover {
+    background-color: var(--bg-base);
+    cursor: pointer;
+  }
+`;
+
 function ResultList() {
+  const navigate = useNavigate();
   return (
     <TableContainer>
       <Table>
@@ -148,43 +168,23 @@ function ResultList() {
               <Pass>Pass</Pass>
             </Td>
             <Td>
-              <ActionButton>
-                <BiDotsVerticalRounded size={20} />
-              </ActionButton>
-            </Td>
-          </Tr>
-          <Tr>
-            <Td>Taofeek</Td>
-            <Td>84656753536</Td>
-            <Td>GNS112</Td>
-            <Td>
-              <Tag $type="active">Active</Tag>
-            </Td>
-            <Td>23/04/2024</Td>
-            <Td>12/40</Td>
-            <Td>
-              <Fail>Fail</Fail>
-            </Td>
-            <Td>
-              <ActionButton>
-                <BiDotsVerticalRounded size={20} />
-              </ActionButton>
-            </Td>
-          </Tr>
-          <Tr>
-            <Td>Taofeek</Td>
-            <Td>84656753537</Td>
-            <Td>GNS112</Td>
-            <Td>
-              <Tag $type="pending">pending</Tag>
-            </Td>
-            <Td>23/04/2024</Td>
-            <Td>27/40</Td>
-            <Td>Pass</Td>
-            <Td>
-              <ActionButton>
-                <BiDotsVerticalRounded size={20} />
-              </ActionButton>
+              <Menus>
+                <Menus.Toggle id="me" />
+                <Menus.List id="me">
+                  <li>
+                    <Button onClick={() => navigate("008308e0e8")}>
+                      <IoMdEye size={18} color="var(--color-gray-500)" /> See
+                      details
+                    </Button>
+                  </li>
+                  <li>
+                    <Button>
+                      <MdDelete size={18} color="var(--color-gray-500)" />
+                      Delete
+                    </Button>
+                  </li>
+                </Menus.List>
+              </Menus>
             </Td>
           </Tr>
         </Tbody>

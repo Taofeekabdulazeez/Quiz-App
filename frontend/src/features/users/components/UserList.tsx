@@ -1,8 +1,9 @@
 import { useUsers } from "../hooks/useUsers";
 import styled, { css } from "styled-components";
-import ActionButton from "../../../ui/ActionButton";
-import { BiDotsVerticalRounded } from "react-icons/bi";
 import TableLoader from "../../../ui/TableLoader";
+import Menus from "../../../components/Menus";
+import { MdDelete, MdEdit } from "react-icons/md";
+import { IoMdEye } from "react-icons/io";
 
 export default UserList;
 
@@ -75,6 +76,24 @@ const Tag = styled.span<{ $type: string }>`
     `}
 `;
 
+const Button = styled.button`
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  border: 0;
+  background: none;
+  width: 100%;
+  padding: 1rem 2rem;
+  font-weight: 500;
+  color: var(--color-gray-700);
+
+  &:hover {
+    background-color: var(--bg-base);
+    cursor: pointer;
+  }
+`;
+
 function UserList() {
   const { isLoading, users, error } = useUsers();
 
@@ -107,9 +126,27 @@ function UserList() {
                 <Tag $type="verified">Verified</Tag>
               </Td>
               <Td>
-                <ActionButton>
-                  <BiDotsVerticalRounded size={20} />
-                </ActionButton>
+                <Menus>
+                  <Menus.Toggle id={user._id} />
+                  <Menus.List id={user._id}>
+                    <li>
+                      <Button>
+                        <IoMdEye size={18} color="var(--color-gray-500)" /> View
+                      </Button>
+                    </li>
+                    <li>
+                      <Button>
+                        <MdEdit size={18} color="var(--color-gray-500)" /> Edit
+                      </Button>
+                    </li>
+                    <li>
+                      <Button>
+                        <MdDelete size={18} color="var(--color-gray-500)" />
+                        Delete
+                      </Button>
+                    </li>
+                  </Menus.List>
+                </Menus>
               </Td>
             </Tr>
           ))}

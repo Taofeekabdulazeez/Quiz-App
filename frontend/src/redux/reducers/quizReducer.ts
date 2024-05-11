@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import {} from "@reduxjs/toolkit/query";
 import { QuizState, Question } from "../interfaces/interface";
 
 const SECS_PER_QUESTION = 30;

@@ -2,7 +2,18 @@ import { GrCompliance } from "react-icons/gr";
 import { LuUsers } from "react-icons/lu";
 import { PiMedal } from "react-icons/pi";
 import { TbReload } from "react-icons/tb";
-import { Cell, Pie, PieChart } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 import styled from "styled-components";
 
 const data = [
@@ -95,6 +106,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
+  margin-bottom: 6rem;
 `;
 
 const Box = styled.div`
@@ -251,6 +263,27 @@ function Dashboard() {
         </Box>
         <Box></Box>
       </Container>
+      <Box>
+        <BarChart width={730} height={250} data={data}>
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="var(--color-cyan-400)"
+            fill="var(--color-blue-50)"
+            fillOpacity={0.3}
+          />
+          <XAxis dataKey="grade" stroke="var(--color-cyan-900)" />
+          <YAxis stroke="var(--color-cyan-900)" />
+          <Tooltip
+            wrapperStyle={{ backgroundColor: "red" }}
+            contentStyle={{
+              backgroundColor: "var(--color-cyan-100)",
+              border: 0,
+            }}
+          />
+          <Legend />
+          <Bar dataKey="noOfStudents" fill="var(--color-cyan-700)" />
+        </BarChart>
+      </Box>
     </div>
   );
 }

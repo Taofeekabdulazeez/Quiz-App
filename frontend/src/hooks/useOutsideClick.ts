@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useOustideClick(handler: any, listenCapturing = true) {
-  const ref = useRef<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLElement | null>(null);
 
   useEffect(
     function () {

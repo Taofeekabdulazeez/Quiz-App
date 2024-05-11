@@ -6,7 +6,7 @@ import TableLoader from "../../../ui/TableLoader";
 
 export default UserList;
 
-const TableContainer = styled.table`
+const TableContainer = styled.div`
   overflow: hidden;
   border-radius: 13px;
   width: 100%;

@@ -19,7 +19,7 @@ const StyleLink = styled(NavLink)`
   gap: 0.6rem;
   color: var(--color-gray-700);
   font-weight: 500;
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-xxs);
   text-decoration: none;
   padding: 1.2rem 3.2rem;
   border-radius: 13px;

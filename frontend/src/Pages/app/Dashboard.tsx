@@ -43,6 +43,12 @@ const data = [
   },
 ];
 
+const rateData = [
+  { performance: "Good", rate: 39 },
+  { performance: "Average", rate: 36 },
+  { performance: "Good", rate: 15 },
+];
+
 const Heading = styled.h2`
   margin-bottom: 2rem;
 `;
@@ -144,6 +150,33 @@ const Grade = styled.span`
   font-weight: 500;
 `;
 
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+}: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+any) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="white"
+      textAnchor={x > cx ? "start" : "end"}
+      dominantBaseline="central"
+    >
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
+
 function Dashboard() {
   return (
     <div>
@@ -191,77 +224,46 @@ function Dashboard() {
         <Box>
           <H4>Performance</H4>
           <Flex>
-            <Cols>
-              <li>
-                <C $color="var(--color-celery-600)" />
-                <Grade>A</Grade>
-              </li>
-              <li>
-                <C $color="var(--color-green-600)" />
-                <Grade>B</Grade>
-              </li>
-              <li>
-                <C $color="var(--color-yellow-300)" />
-                <Grade>C</Grade>
-              </li>
-              <li>
-                <C $color="var(--color-orange-600)" />
-                <Grade>D</Grade>
-              </li>
-              <li>
-                <C $color="var(--color-red-600)" />
-                <Grade>E</Grade>
-              </li>
-              <li>
-                <C $color="var(--color-red-900)" />
-                <Grade>F</Grade>
-              </li>
-            </Cols>
-            <PieChart width={400} height={250}>
+            <PieChart width={300} height={250}>
               <Pie
-                data={data}
-                dataKey="noOfStudents"
-                nameKey="grade"
+                data={rateData}
+                dataKey="rate"
+                nameKey="performance"
                 cx="50%"
                 cy="50%"
                 // innerRadius={60}
                 outerRadius={80}
                 fill="red"
                 stroke="var(--bg-layer-1)"
-                label
+                label={renderCustomizedLabel}
+                labelLine={false}
                 paddingAngle={2}
               >
-                <Cell fill="var(--color-green-600)" />
-                <Cell fill="var(--color-cyan-600)" />
-                <Cell fill="var(--color-yellow-300)" />
-                <Cell fill="var(--color-orange-600)" />
-                <Cell fill="var(--color-red-600)" />
-                <Cell fill="var(--color-red-900)" />
+                <Legend />
+                <Cell fill="var(--color-green-500)" />
+                <Cell fill="var(--color-orange-500)" />
+                <Cell fill="var(--color-red-700)" />
               </Pie>
             </PieChart>
             <Cols>
               <li>
-                <Grade>32%</Grade>
+                <C $color="var(--color-green-500)" />
+                <Grade>Good</Grade>
               </li>
               <li>
-                <Grade>41%</Grade>
+                <C $color="var(--color-orange-500)" />
+                <Grade>Average</Grade>
               </li>
               <li>
-                <Grade>23%</Grade>
-              </li>
-              <li>
-                <Grade>13%</Grade>
-              </li>
-              <li>
-                <Grade>5%</Grade>
-              </li>
-              <li>
-                <Grade>2%</Grade>
+                <C $color="var(--color-red-700)" />
+                <Grade>Poor</Grade>
               </li>
             </Cols>
           </Flex>
         </Box>
-        <Box></Box>
+        <Box>
+          <H4>Leaderboards</H4>
+        </Box>
       </Container>
       <Box>
         <BarChart width={730} height={250} data={data}>

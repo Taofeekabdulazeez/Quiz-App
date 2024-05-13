@@ -1,9 +1,10 @@
 // import { useQuiz } from "../contexts/QuizContext";
 import styled from "styled-components";
 import { FaCheck } from "react-icons/fa";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { gotoQuestion } from "../../../redux/reducers/quizReducer";
-// import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { useQuizDispatch, useQuizSelector } from "../hooks/useQuiz";
+import { gotoQuestion } from "../reducers/quizReducer";
+// import { gotoQuestion } from "../../../redux/reducers/quizReducer";
+// import { useQuizDispatch, useQuizSelector } from "../hooks/hooks";
 // import { gotoQuestion } from "../features/quizSlice";
 
 const Button = styled.button`
@@ -54,8 +55,8 @@ interface QindexProps {
 
 function QIndex({ qNumber }: QindexProps) {
   // const { answers } = useQuiz();
-  const { index, answers } = useAppSelector((state) => state.quiz);
-  const dispatch = useAppDispatch();
+  const { index, answers } = useQuizSelector((state) => state.quiz);
+  const dispatch = useQuizDispatch();
   const hasAnswer = typeof answers[qNumber - 1] === "number";
   return (
     <Button

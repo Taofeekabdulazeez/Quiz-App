@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 // import { useSubmit } from "../hooks/useSubmit";
 import styled from "styled-components";
 import { MdAccessTime } from "react-icons/md";
-import { useAppSelector } from "../../../redux/hooks";
+import { useQuizSelector } from "../hooks/useQuiz";
 import { useSubmit } from "../hooks/useSubmit";
-// import { useAppSelector } from "../hooks/hooks";
+// import { useQuizSelector } from "../hooks/hooks";
 
 const FlexRol = styled.div`
   display: flex;
@@ -51,9 +51,9 @@ const P = styled.p`
 
 function Time() {
   const { submitQuiz } = useSubmit();
-  const { name, email } = useAppSelector((state) => state.user);
+  const { name, email } = useQuizSelector((state) => state.user);
 
-  const { time: qTime, score } = useAppSelector((state) => state.quiz);
+  const { time: qTime, score } = useQuizSelector((state) => state.quiz);
   const [time, setTime] = useState<number | null>(qTime);
 
   useEffect(

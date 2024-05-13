@@ -4,11 +4,8 @@ import Question from "./Question";
 import Timer from "./Timer";
 import styled from "styled-components";
 import { Button } from "./Button";
-import { useAppDispatch } from "../../../redux/hooks";
-import {
-  nextQuestion,
-  prevQuestion,
-} from "../../../redux/reducers/quizReducer";
+import { useQuizDispatch } from "../hooks/useQuiz";
+import { nextQuestion, prevQuestion } from "../reducers/quizReducer";
 
 const Screen = styled.div`
   /* max-width: 80rem; */
@@ -43,7 +40,7 @@ const Title = styled.h1`
 `;
 
 function QuestionScreen() {
-  const dispatch = useAppDispatch();
+  const dispatch = useQuizDispatch();
   return (
     <Screen>
       <Header>

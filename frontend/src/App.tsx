@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import QuizProvider from "./redux/store";
 import Users from "./features/users/components/Users";
 import UserOverview from "./features/users/components/UserOverview";
 import Dashboard from "./Pages/app/Dashboard";
@@ -12,6 +11,7 @@ import HomePage from "./Pages/home/HomePage";
 import Questions from "./Pages/app/Questions";
 import QuizApp from "./Pages/quiz/QuizApp";
 import ResultOverview from "./features/results/components/ResultOverview";
+import QuizProvider from "./features/quiz/store/QuizProvider";
 
 function App() {
   return (

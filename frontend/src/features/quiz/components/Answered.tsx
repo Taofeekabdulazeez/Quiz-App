@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useAppSelector } from "../../../redux/hooks";
+import { useQuizSelector } from "../hooks/useQuiz";
 
 const P = styled.div`
   font-size: 1.2rem;
@@ -11,8 +11,8 @@ const P = styled.div`
 
 function Answered() {
   // const { answered, questions } = useQuiz();
-  const { questions } = useAppSelector((state) => state.quiz);
-  const answered = useAppSelector(
+  const { questions } = useQuizSelector((state) => state.quiz);
+  const answered = useQuizSelector(
     (state) => state.quiz.answers.filter((answer) => answer !== null).length
   );
   return (

@@ -1,5 +1,5 @@
-// import { useAppSelector } from "../hooks/hooks";
-import { useAppSelector } from "../../../redux/hooks";
+// import { useQuizSelector } from "../hooks/hooks";
+import { useQuizSelector } from "../hooks/useQuiz";
 import QIndex from "./QIndex";
 import styled from "styled-components";
 
@@ -12,7 +12,7 @@ const FlexWrap = styled.div`
 
 function QuestionsNav() {
   // const { questions } = useQuiz();
-  const questions = useAppSelector((state) => state.quiz.questions);
+  const questions = useQuizSelector((state) => state.quiz.questions);
   const numQuestions = Number(questions?.length);
   return (
     <div>

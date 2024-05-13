@@ -3,10 +3,10 @@ import FinishScreen from "../../features/quiz/components/FinishScreen";
 import Loader from "../../features/quiz/components/Loader";
 import Main from "../../features/quiz/components/Main";
 import StartScreen from "../../features/quiz/components/StartScreen";
-import { useAppSelector } from "../../redux/hooks";
+import { useQuizSelector } from "../../features/quiz/hooks/useQuiz";
 
 function QuizApp() {
-  const status = useAppSelector((state) => state.quiz.status);
+  const status = useQuizSelector((state) => state.quiz.status);
 
   return (
     <AppLayout>

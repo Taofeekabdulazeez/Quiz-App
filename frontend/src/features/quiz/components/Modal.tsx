@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { unConfirmSubmission } from "../../../redux/reducers/quizReducer";
+import { useQuizDispatch, useQuizSelector } from "../hooks/useQuiz";
+import { unConfirmSubmission } from "../reducers/quizReducer";
+// import { unConfirmSubmission } from "../../../redux/reducers/quizReducer";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -67,9 +68,9 @@ const Button = styled.div<{ $type?: string }>`
 
 function Modal() {
   // const { submitQuiz } = useSubmit();
-  const { onSubmit } = useAppSelector((state) => state.quiz);
-  // const { name, email } = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
+  const { onSubmit } = useQuizSelector((state) => state.quiz);
+  // const { name, email } = useQuizSelector((state) => state.user);
+  const dispatch = useQuizDispatch();
 
   return (
     onSubmit && (

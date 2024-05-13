@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useAppSelector } from "../../../redux/hooks";
+import { useQuizSelector } from "../hooks/useQuiz";
 
 const Styled = styled.div`
   margin-top: 12rem;
@@ -9,7 +9,7 @@ const Styled = styled.div`
 `;
 
 function FinishScreen() {
-  const { questions, score } = useAppSelector((state) => state.quiz);
+  const { questions, score } = useQuizSelector((state) => state.quiz);
 
   return (
     <Styled>

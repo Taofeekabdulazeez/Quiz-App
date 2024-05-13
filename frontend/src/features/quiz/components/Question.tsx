@@ -1,11 +1,6 @@
-// import { useAppSelector } from "../hooks/hooks";
-import { useAppSelector } from "../../../redux/hooks";
+import { useQuizSelector } from "../hooks/useQuiz";
 import Option from "./Option";
 import styled from "styled-components";
-// import { useLoaderData } from "react-router-dom";
-// import { questionObj } from "../interfaces/interface";
-// import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-// import { storeQuestions } from "../features/quizSlice";
 
 const Span = styled.span`
   font-size: 1.6rem;
@@ -31,7 +26,7 @@ const List = styled.ul`
 `;
 
 function Question() {
-  const { questions, index } = useAppSelector((state) => state.quiz);
+  const { questions, index } = useQuizSelector((state) => state.quiz);
   const { question, options } = questions[index];
 
   return (

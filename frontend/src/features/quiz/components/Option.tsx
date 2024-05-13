@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import CheckBox from "./CheckBox";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { newAnwser } from "../../../redux/reducers/quizReducer";
-// import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-// import { newAnwser } from "../features/quizSlice";
+import { useQuizDispatch, useQuizSelector } from "../hooks/useQuiz";
+import { newAnwser } from "../reducers/quizReducer";
+// import { newAnwser } from "../../../redux/reducers/quizReducer";
 
 const StyledOption = styled.li`
   display: flex;
@@ -28,8 +27,8 @@ interface OptionProps {
 }
 
 function Option({ children, optIndex }: OptionProps) {
-  const { answers, index } = useAppSelector((state) => state.quiz);
-  const dispatch = useAppDispatch();
+  const { answers, index } = useQuizSelector((state) => state.quiz);
+  const dispatch = useQuizDispatch();
   return (
     <StyledOption onClick={() => dispatch(newAnwser(optIndex))}>
       <CheckBox isChecked={answers[index] === optIndex} />

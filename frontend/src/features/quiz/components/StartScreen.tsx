@@ -1,11 +1,8 @@
-import { useDispatch } from "react-redux";
-// import { storeUser } from "../features/userSlice";
 import styled from "styled-components";
-
-// import { startQuiz } from "../features/quizSlice";
 import { useState } from "react";
-import { storeUser } from "../../../redux/reducers/userReducer";
-import { startQuiz } from "../../../redux/reducers/quizReducer";
+import { storeUser } from "../reducers/userReducer";
+import { startQuiz } from "../reducers/quizReducer";
+import { useQuizDispatch } from "../hooks/useQuiz";
 
 const StyledStartScreen = styled.div`
   height: 100vh;
@@ -82,9 +79,9 @@ const FlexCol = styled.div`
 
 function StartScreen() {
   const [name, setName] = useState("a");
-  const [email, setEmail] = useState("a");
+  const [email, setEmail] = useState("example@gmail.com");
   // const [isEmpty, setIsEmpty] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useQuizDispatch();
 
   const handleStartQuiz = function (event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

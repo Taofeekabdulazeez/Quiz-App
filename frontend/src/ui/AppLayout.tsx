@@ -1,9 +1,9 @@
-import { Toaster } from "react-hot-toast";
 import styled from "styled-components";
 import Aside from "./Aside";
 import { Outlet } from "react-router-dom";
 import Main from "./Main";
 import Header from "./Header";
+import Notification from "../components/Notification";
 
 const Layout = styled.div`
   display: grid;
@@ -22,26 +22,7 @@ function AppLayout() {
           <Outlet />
         </Main>
       </Layout>
-      <Toaster
-        position="top-center"
-        gutter={12}
-        containerStyle={{ margin: "6px" }}
-        toastOptions={{
-          success: {
-            duration: 3000,
-          },
-          error: {
-            duration: 5000,
-          },
-          style: {
-            fontSize: "14px",
-            maxWidth: "500px",
-            padding: "16px 24px",
-            backgroundColor: "var(--color-gray-100)",
-            color: "var(--color-gray-700)",
-          },
-        }}
-      />
+      <Notification />
     </>
   );
 }

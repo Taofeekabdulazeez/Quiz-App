@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { useAppDispatch } from "../../../redux/hooks";
-import { isSubmitting, submit } from "../../../redux/reducers/quizReducer";
+import { useQuizDispatch } from "./useQuiz";
+import { isSubmitting, submit } from "../reducers/quizReducer";
 
 export function useSubmit() {
-  const dispatch = useAppDispatch();
+  const dispatch = useQuizDispatch();
 
   const { mutate: submitQuiz } = useMutation({
     mutationFn: async ({

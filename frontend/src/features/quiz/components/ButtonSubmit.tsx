@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import { confirmSubmission } from "../../../redux/reducers/quizReducer";
-import { useAppDispatch } from "../../../redux/hooks";
-// import { useAppDispatch } from "../hooks/hooks";
-// import { confirmSubmission } from "../features/quizSlice";
+import { useQuizDispatch } from "../hooks/useQuiz";
+import { confirmSubmission } from "../reducers/quizReducer";
 
 export const Button = styled.button<{ $type?: string }>`
   text-align: center;
@@ -21,7 +19,7 @@ export const Button = styled.button<{ $type?: string }>`
 `;
 
 function ButtonSubmit() {
-  const dispatch = useAppDispatch();
+  const dispatch = useQuizDispatch();
   return (
     <Button
       onClick={() => {

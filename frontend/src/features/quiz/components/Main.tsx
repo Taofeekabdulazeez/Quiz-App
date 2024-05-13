@@ -1,3 +1,6 @@
+import { useQuestions } from "../../questions/hooks/useQuestions";
+import { useQuizDispatch } from "../hooks/useQuiz";
+import { storeQuestions } from "../reducers/quizReducer";
 import styled from "styled-components";
 
 import Loader from "./Loader";
@@ -9,10 +12,6 @@ import Answered from "./Answered";
 import ButtonSubmit from "./ButtonSubmit";
 import Aside from "./Aside";
 import UserGuide from "./UserGuide";
-import { useQuestions } from "../../questions/hooks/useQuestions";
-import { storeQuestions } from "../../../redux/reducers/quizReducer";
-import { useAppDispatch } from "../../../redux/hooks";
-// import { useQuestions } from "../hooks/useQuestions";
 
 const MainLayout = styled.main`
   display: grid;
@@ -30,7 +29,7 @@ const MainLayout = styled.main`
 
 function Main() {
   const { isLoading, questions } = useQuestions();
-  const dispatch = useAppDispatch();
+  const dispatch = useQuizDispatch();
   if (questions) dispatch(storeQuestions(questions));
 
   if (isLoading) return <Loader message="Loading Questions..." />;

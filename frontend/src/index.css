@@ -492,3 +492,7 @@ body {
 :root.dark-mode {
   --loader-gray: #383838;
 }
+
+.white {
+  background-color: wheat;
+}

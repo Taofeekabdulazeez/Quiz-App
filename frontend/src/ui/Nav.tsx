@@ -4,6 +4,31 @@ import { LuBarChart2, LuUpload } from "react-icons/lu";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+const navLinks = [
+  { label: "Home", to: "dashboard", Icon: IoHomeOutline },
+  { label: "Students", to: "users", Icon: FiUsers },
+  { label: "Results", to: "results", Icon: LuBarChart2 },
+  { label: "Uploads", to: "uploads", Icon: LuUpload },
+  { label: "Settings", to: "settings", Icon: IoSettingsOutline },
+];
+
+export default function Nav() {
+  return (
+    <StyledNav>
+      <StyleLinks>
+        {navLinks.map(({ label, to, Icon }) => (
+          <li>
+            <StyleLink to={to}>
+              <Icon size={20} />
+              {label}
+            </StyleLink>
+          </li>
+        ))}
+      </StyleLinks>
+    </StyledNav>
+  );
+}
+
 const StyledNav = styled.nav``;
 
 const StyleLinks = styled.ul`
@@ -22,7 +47,7 @@ const StyleLink = styled(NavLink)`
   font-size: var(--font-size-xxs);
   text-decoration: none;
   padding: 1.2rem 3.2rem;
-  border-radius: 13px;
+  border-radius: 9px;
   position: relative;
   overflow: hidden;
 
@@ -50,45 +75,3 @@ const StyleLink = styled(NavLink)`
     display: block;
   }
 `;
-
-function Nav() {
-  return (
-    <StyledNav>
-      <StyleLinks>
-        <li>
-          <StyleLink to="dashboard">
-            <IoHomeOutline size={20} />
-            Home
-          </StyleLink>
-        </li>
-        <li>
-          <StyleLink to="users">
-            <FiUsers size={20} />
-            Students
-          </StyleLink>
-        </li>
-
-        <li>
-          <StyleLink to="results">
-            <LuBarChart2 size={20} />
-            Results
-          </StyleLink>
-        </li>
-        <li>
-          <StyleLink to="uploads">
-            <LuUpload size={20} />
-            Uploads
-          </StyleLink>
-        </li>
-        <li>
-          <StyleLink to="settings">
-            <IoSettingsOutline size={20} />
-            Settings
-          </StyleLink>
-        </li>
-      </StyleLinks>
-    </StyledNav>
-  );
-}
-
-export default Nav;

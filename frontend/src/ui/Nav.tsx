@@ -17,7 +17,7 @@ export default function Nav() {
     <StyledNav>
       <StyleLinks>
         {navLinks.map(({ label, to, Icon }) => (
-          <li>
+          <li key={label}>
             <StyleLink to={to}>
               <Icon size={20} />
               {label}

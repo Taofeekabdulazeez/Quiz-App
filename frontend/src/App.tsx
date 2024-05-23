@@ -7,7 +7,7 @@ import Settings from "./Pages/app/Settings";
 import Login from "./Pages/login/Login";
 import Results from "./Pages/app/Results";
 import Uploads from "./Pages/app/Uploads";
-import HomePage from "./Pages/home/HomePage";
+import HomePage from "./Pages/Home/HomePage";
 import Questions from "./Pages/app/Questions";
 import QuizApp from "./Pages/quiz/QuizApp";
 import ResultOverview from "./features/results/components/ResultOverview";

@@ -8,20 +8,75 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUser = exports.getAllUsers = void 0;
-const data_1 = require("../data/data");
+exports.updateUser = exports.createUser = exports.deleteUser = exports.getUser = exports.getAllUsers = void 0;
+const userModel_1 = __importDefault(require("../models/userModel"));
+const mongodb_1 = require("mongodb");
 function getAllUsers(request, response) {
     return __awaiter(this, void 0, void 0, function* () {
-        response.status(200).json(data_1.users);
+        try {
+            const users = yield userModel_1.default.find();
+            response.status(200).json(users);
+        }
+        catch (error) {
+            console.log(error);
+        }
     });
 }
 exports.getAllUsers = getAllUsers;
 function getUser(request, response) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { id } = request.params;
-        const user = data_1.users.find((user) => user.id === Number(id));
-        response.status(200).json(user);
+        try {
+            const { id } = request.params;
+            const user = yield userModel_1.default.findOne({ _id: new mongodb_1.ObjectId(id) });
+            response.status(200).json(user);
+        }
+        catch (error) {
+            console.log(error);
+        }
     });
 }
 exports.getUser = getUser;
+function deleteUser(request, response) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const id = request.params.id;
+            yield userModel_1.default.findByIdAndDelete(id);
+            response.status(204).json(null);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    });
+}
+exports.deleteUser = deleteUser;
+function createUser(request, response) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const newUser = yield userModel_1.default.create(request.body);
+            return response.status(200).json(newUser);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    });
+}
+exports.createUser = createUser;
+function updateUser(request, resposne) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { id } = request.params;
+        try {
+            const user = yield userModel_1.default.findOneAndUpdate({ _id: id }, request.body, {
+                new: true,
+            });
+            return resposne.status(200).json(user);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    });
+}
+exports.updateUser = updateUser;

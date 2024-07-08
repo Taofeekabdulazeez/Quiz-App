@@ -31,7 +31,7 @@ const Flex = styled.div`
 
 function QuestionList() {
   const { isLoading, questions } = useQuestions();
-  console.log(questions);
+  console.log(isLoading, questions);
 
   if (isLoading || !questions) return <QuestionsLoader />;
 

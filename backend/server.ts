@@ -5,9 +5,13 @@ import app from "./index";
 //For env File
 dotenv.config({ path: "./config.env" });
 
-mongoose.connect(
-  `mongodb+srv://sirfeeky:f0xOlSY8SDbrYBEX@cluster0.zlxo37a.mongodb.net/app`
-);
+// `mongodb+srv://sirfeeky:f0xOlSY8SDbrYBEX@cluster0.zlxo37a.mongodb.net/app`
+try {
+  mongoose.connect("mongodb://host.docker.internal:27017/quiz-app");
+  console.log("Connected to MongoDB");
+} catch (err) {
+  console.log("Failed to connect to MongoDB");
+}
 // const port = process.env.PORT || 8000;
 const port = 3000;
 
